@@ -1,5 +1,10 @@
 
 body {
+    background-image: url('images/default-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transition: background-image 0.5s ease-in-out;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -120,7 +125,7 @@ p {
 .menu-icon {
     position: absolute;
     top: -20px;
-    left: 10px;
+    left: 20px;
     cursor: pointer;
   }
   
@@ -128,6 +133,53 @@ p {
     width: 30px;
     height: 30px;
   }
+  
+  .unit-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    max-width: 100%; 
+    height: calc(100vh - 82px);
+    background-color: rgba(163, 33, 33, 0.591);
+    border: 1px solid #ddd;
+    padding: 10px;
+    z-index: 1000;
+ 
+}
+.unit-dropdown.visible {
+    display: block;
+}
+  
+  .unit-button { 
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #eee; 
+    color: #333; 
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  .unit-button:hover {
+    background-color: #ddd; 
+    color: #333; 
+  }
+  
+  .unit-button.active {
+    background-color: #007bff; 
+    color: white; 
+  }
+  
+  .unit-button:focus {
+    outline: 2px solid #007bff;
+  }
+
+
 @keyframes fadeIn {
     from {
         opacity: 0;
