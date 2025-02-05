@@ -79,22 +79,21 @@
             <p><strong>Humidity:</strong> NA</p>
             <p><strong>Wind Speed:</strong> NA</p>
         </div>
-    </div>
-      <!-- Burger Menu Button -->
-      <div class="menu-icon" onclick="toggleCityList()">
-        <img src="images/burger_icon.png" alt="Menu" width="30">
-        </button>
-                <div id="burgerMenu" class="burger-menu-content">
-            <h3>Select a City</h3>
-            <div id="burgerCityList"></div>
+
+        <div class="menu-icon" onclick="toggleUnitDropdown()">
+            <img src="images/hamburger-icon.png" alt="Menu Icon">
+
+            <div id="unitDropdown" class="unit-dropdown">
+                <label>Select Unit:</label>
+                <div class="unit-buttons">
+                  <button data-unit="metric" onclick="updateUnit('metric')" class="unit-button">Metric (°C, m/s)</button>
+                  <button data-unit="imperial" onclick="updateUnit('imperial')" class="unit-button">Imperial (°F, mph)</button>
+                  <button data-unit="standard" onclick="updateUnit('standard')" class="unit-button">Standard (Kelvin, m/s)</button>
+                </div>
+              </div>
+    
+
         </div>
-        <div class="menu-options">
-            <p><strong>Units:</strong></p>
-            <button onclick="setUnit('metric')">Metric</button>
-            <button onclick="setUnit('imperial')">Imperial</button>
-            <button onclick="setUnit('standard')">Standard</button>
-          </div>
-    </div>
     <script src="script.js"></script>
     <script src="script2.js"></script>
 </body>
