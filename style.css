@@ -1,0 +1,140 @@
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #a2c9fc, #e1f4fe);
+}
+
+.weather-container {
+    background: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.city-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#cityInput {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.city-dropdown-button {
+    background: #f3f4f6;
+    border: none;
+    border-radius: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.city-dropdown-button:hover {
+    background: #d1d5db;
+}
+
+.city-dropdown {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 300px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 100;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    top: 100%; /* Position directly below the input box */
+    left: 0;
+}
+
+.city-input-container {
+    position: relative;
+    width: 100%;
+}
+.city-dropdown div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.city-dropdown div:hover {
+    background-color: #f0f0f0;
+}
+
+button {
+    
+    padding: 10px 20px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.weather-result-container {
+    width: 100%;
+    max-width: 600px;
+    height: 200px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    margin-top: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.weather-result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+p {
+    margin: 5px 0;
+}
+.menu-icon {
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    cursor: pointer;
+  }
+  
+  .menu-icon img {
+    width: 30px;
+    height: 30px;
+  }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
