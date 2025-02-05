@@ -1,191 +1,165 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
-    position: relative;
-}
-#user-info-container {
-    display: none; /* Initially hidden */
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 2; /* Ensure it's above other elements */
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    padding: 10px; /* Add some padding */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
+const apiKey = 'efd6a5311922d90c0b589dcea7f1663e';
+const cities = ["Tbilisi", "London", "New York", "Paris", "Tokyo", "Berlin", "Moscow", "Beijing"];
 
-#user-email-display {
-    font-size: 16px;
-    color: black;
-}
+let unit = localStorage.getItem('unit') || 'metric';
 
-#sign-out-button {
-    display: none; /* Initially hidden */
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+function setUnit(selectedUnit) {
+    unit = selectedUnit;
+
+    localStorage.setItem('unit', selectedUnit);
+
+    // Update the active button style
+    const buttons = document.querySelectorAll('.unit-button');
+    buttons.forEach(button => {
+        if (button.dataset.unit === selectedUnit) {
+            // Highlight the selected unit button
+            button.classList.add('active');
+        } else {
+            // Remove active class from the other buttons
+            button.classList.remove('active');
+        }
+    });
+
+    // Change background image based on the unit selected
+    changeBackgroundImage(selectedUnit);
+
+    console.log(`Unit set to ${selectedUnit}`);
 }
 
-#sign-out-button:hover {
-    background-color: #d32f2f;
-}
-
-/* Container for buttons */
-.button-container {
-    position: fixed;
-    top: 20px; /* Distance from the top of the viewport */
-    right: 20px; /* Distance from the right edge */
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 10px; /* Space between buttons */
-}
-
-/* Style for Sign Up button */
-.open-modal-sign-up {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-/* Style for Sign In button */
-.open-modal-sign-in {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-/* Button hover effects */
-.open-modal-sign-up:hover {
-    background-color: #45a049;
-}
-
-.open-modal-sign-in:hover {
-    background-color: #1976D2;
-}
-
-/* Modal Styling */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    animation: fadeIn 0.5s;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    position: relative;
-    text-align: left;
-    animation: slideIn 0.5s;
-}
-
-/* Close Button */
-.close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.close:hover {
-    color: red;
-}
-
-/* Input Field Styling */
-input[type="email"], 
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    display: inline-block;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-/* Error Message Styling */
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-@keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
+function changeBackgroundImage(unit) {
+    const body = document.body;
+    if (unit === 'metric') {
+        body.style.backgroundImage = "url('images/celsius-background.jpg')";
+    } else if (unit === 'imperial') {
+        body.style.backgroundImage = "url('images/fahrenheit-background.jpg')";
+    } else if (unit === 'standard') {
+        body.style.backgroundImage = "url('images/kelvin-background.jpg')";
     }
 }
 
-/* Pulse Animation on Buttons */
-.open-modal-sign-up, .open-modal-sign-in, #user-info-container button {
-    animation: pulse 2s infinite;
+function getWeather() {
+  const city = document.getElementById('cityInput').value.trim();
+
+  if (!city) {
+    alert('Please enter or select a city.');
+    return;
+  }
+
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+
+  // Show loading placeholder before the fetch completes
+  showWeatherPlaceholder();
+
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('City not found');
+      }
+      return response.json();
+    })
+    .then(data => {
+      showWeatherResult(data);
+    })
+    .catch(error => {
+      showWeatherError(error.message);
+    });
 }
+
+function showWeatherPlaceholder() {
+  const weatherResultContainer = document.getElementById('weatherResult');
+  weatherResultContainer.innerHTML = `
+    <p><strong>City:</strong> NA</p>
+    <p><strong>Temperature:</strong> NA</p>
+    <p><strong>Weather:</strong> NA</p>
+    <p><strong>Humidity:</strong> NA</p>
+    <p><strong>Wind Speed:</strong> NA</p>
+  `;
+}
+
+function showWeatherResult(data) {
+    const weatherResultContainer = document.getElementById('weatherResult');
+  
+    let temp, windSpeed;
+  
+    // Handle the temperature based on the selected unit
+    if (unit === 'metric') {
+      temp = `${data.main.temp} °C`;  // Celsius for metric
+      windSpeed = `${data.wind.speed} m/s`;  // m/s for metric
+    } else if (unit === 'imperial') {
+      // Convert temperature from Celsius to Fahrenheit
+      temp = `${(data.main.temp * 9/5) + 32} °F`;
+      // Convert wind speed from m/s to mph
+      windSpeed = `${data.wind.speed * 2.23694} mph`;  // m/s to mph
+    } else if (unit === 'standard') {
+      temp = `${data.main.temp} K`;  // Kelvin for standard
+      windSpeed = `${data.wind.speed} m/s`;  // m/s for standard
+    }
+  
+    // Display the weather data
+    weatherResultContainer.innerHTML = `
+      <p><strong>City:</strong> ${data.name}</p>
+      <p><strong>Temperature:</strong> ${temp}</p>
+      <p><strong>Weather:</strong> ${data.weather[0].description}</p>
+      <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
+      <p><strong>Wind Speed:</strong> ${windSpeed}</p>
+    `;
+  }
+
+function showWeatherError(message) {
+  const weatherResultContainer = document.getElementById('weatherResult');
+  weatherResultContainer.innerHTML = `<p style="color: red;">${message}</p>`;
+}
+
+function initializeCityList() {
+  const cityList = document.getElementById('cityList');
+
+  cities.forEach(city => {
+    const cityOption = document.createElement('div');
+    cityOption.textContent = city;
+    cityOption.onclick = () => setCity(city);
+    cityList.appendChild(cityOption);
+  });
+}
+
+function toggleCityList() {
+  const cityList = document.getElementById('cityList');
+  cityList.style.display = cityList.style.display === 'block' ? 'none' : 'block';
+}
+
+function setCity(cityName) {
+  document.getElementById('cityInput').value = cityName;
+  toggleCityList();
+}
+
+document.getElementById('cityInput').addEventListener('input', filterCityList);
+
+function filterCityList() {
+  const input = document.getElementById('cityInput').value.toLowerCase();
+  const cityList = document.getElementById('cityList');
+
+  cityList.innerHTML = '';
+
+  cities.forEach(city => {
+    if (city.toLowerCase().includes(input)) {
+      const cityOption = document.createElement('div');
+      cityOption.textContent = city;
+      cityOption.onclick = () => setCity(city);
+      cityList.appendChild(cityOption);
+    }
+  });
+
+  cityList.style.display = cityList.children.length > 0 ? 'block' : 'none';
+}
+function toggleUnitDropdown() {
+    const unitDropdown = document.getElementById('unitDropdown');
+    unitDropdown.classList.toggle('visible');
+}
+document.querySelectorAll('.unit-button').forEach(button => {
+    button.addEventListener('click', function () {
+        const selectedUnit = this.dataset.unit;
+        setUnit(selectedUnit);
+    });
+});
+
+initializeCityList();
