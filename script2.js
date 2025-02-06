@@ -1,5 +1,5 @@
 const apiKey = 'efd6a5311922d90c0b589dcea7f1663e';
-const cities = ["Tbilisi", "London", "New York", "Paris", "Tokyo", "Berlin", "Moscow", "Beijing"];
+const cities = ["Tbilisi", "London", "New York", "Paris", "Tokyo", "Berlin", "Beijing"];
 
 let unit = localStorage.getItem('unit') || 'metric';
 
