@@ -9,18 +9,31 @@
 </head>
 <body>
 
-    <!-- Container for buttons or user info (positioned at top-right corner) -->
-    <div class="button-container" id="auth-buttons" style="display: flex; flex-direction: row; align-items: center; gap: 10px; position: fixed; top: 20px; right: 20px;">
-        <button class="open-modal-sign-up" onclick="openModal('modal-sign-up')">Sign Up</button>
-        <button class="open-modal-sign-in" onclick="openModal('modal-sign-in')">Sign In</button>
-    </div>
-
-    <!-- User Info & Sign Out -->
-    <div id="user-info-container">
-        <span id="user-email-display"></span>  
-        <button id="sign-out-button" onclick="signOut()">Sign Out</button>
-    </div>
-
+    <!-- Header Section -->
+    <header class="main-header">
+        <h1 class="site-title">Weather Center</h1>
+            <!-- User Info & Sign Out -->
+            <div id="user-info-container">
+                <span id="user-email-display"></span>  
+                <button id="sign-out-button" onclick="signOut()">Sign Out</button>
+            </div>
+            <div class="button-container" id="auth-buttons">
+                <button class="open-modal-sign-up" onclick="openModal('modal-sign-up')">Sign Up</button>
+                <button class="open-modal-sign-in" onclick="openModal('modal-sign-in')">Sign In</button>
+            </div>
+            <div class="menu-icon" onclick="toggleUnitDropdown()">
+                <img src="images/hamburger-icon.png" alt="Menu Icon">
+                <div id="unitDropdown" class="unit-dropdown">
+                    <label>Select Unit:</label>
+                    <div class="unit-buttons">
+                      <button data-unit="metric" onclick="updateUnit('metric')" class="unit-button">Metric (°C, m/s)</button>
+                      <button data-unit="imperial" onclick="updateUnit('imperial')" class="unit-button">Imperial (°F, mph)</button>
+                      <button data-unit="standard" onclick="updateUnit('standard')" class="unit-button">Standard (Kelvin, m/s)</button>
+                    </div>
+                </div>
+            </div>
+       
+    </header>
 
     <!-- Sign Up Modal -->
     <div id="modal-sign-up" class="modal">
@@ -60,7 +73,8 @@
             <p id="error-message-sign-in" class="error-message"></p>
         </div>
     </div>
-    <!-- Weather -->
+
+    <!-- Weather Section -->
     <div class="weather-container">
         <h1>Weather Information</h1>
         <p>Select a city or enter one manually:</p>
@@ -73,27 +87,25 @@
             <div id="cityList" class="city-dropdown"></div>
         </div>
         <div class="weather-box" id="weatherResult">
-            <p><strong>City:</strong> NA</p>
-            <p><strong>Temperature:</strong> NA</p>
-            <p><strong>Weather:</strong> NA</p>
-            <p><strong>Humidity:</strong> NA</p>
-            <p><strong>Wind Speed:</strong> NA</p>
+            <p>City: NA</p>
+            <p>Temperature: NA</p>
+            <p>Weather: NA</p>
+            <p>Humidity: NA</p>
+            <p>Wind Speed: NA</p>
         </div>
-
-        <div class="menu-icon" onclick="toggleUnitDropdown()">
-            <img src="images/hamburger-icon.png" alt="Menu Icon">
-
-            <div id="unitDropdown" class="unit-dropdown">
-                <label>Select Unit:</label>
-                <div class="unit-buttons">
-                  <button data-unit="metric" onclick="updateUnit('metric')" class="unit-button">Metric (°C, m/s)</button>
-                  <button data-unit="imperial" onclick="updateUnit('imperial')" class="unit-button">Imperial (°F, mph)</button>
-                  <button data-unit="standard" onclick="updateUnit('standard')" class="unit-button">Standard (Kelvin, m/s)</button>
-                </div>
-              </div>
-    
-
+    </div>
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Weather Center. All Rights Reserved.</p>
+            <nav class="footer-links">
+                <a href="Privacy.html">Privacy Policy</a> | 
+                <a href="Contact.html">Terms of Service</a> | 
+                <a href="Terms.html">Contact Us</a>
+            </nav>
         </div>
+    </footer>
+
     <script src="script.js"></script>
     <script src="script2.js"></script>
 </body>
