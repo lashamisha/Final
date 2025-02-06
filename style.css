@@ -15,6 +15,7 @@ body {
     background: linear-gradient(135deg, #a2c9fc, #e1f4fe);
 }
 
+
 .weather-container {
     background: #ffffff;
     border: 2px solid #ddd;
@@ -124,7 +125,7 @@ p {
 }
 .menu-icon {
     position: absolute;
-    top: -20px;
+    top:  20px;
     left: 20px;
     cursor: pointer;
   }
@@ -190,3 +191,4 @@ p {
         transform: translateY(0);
     }
 }
+
