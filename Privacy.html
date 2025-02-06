@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up & Sign In Modals</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+
+<body>
+      <!-- Header Section -->
+        <header class="main-header">
+            <h1 class="site-title">Weather Center</h1>
+                <!-- User Info & Sign Out -->
+                <div id="user-info-container">
+                    <span id="user-email-display"></span>  
+                    <button id="sign-out-button" onclick="signOut()">Sign Out</button>
+                </div>
+                <div class="button-container" id="auth-buttons">
+                    <button class="open-modal-sign-up" onclick="openModal('modal-sign-up')">Sign Up</button>
+                    <button class="open-modal-sign-in" onclick="openModal('modal-sign-in')">Sign In</button>
+                </div>        
+        </header>
+
+     <!-- Sign Up Modal -->
+    <div id="modal-sign-up" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('modal-sign-up')">&times;</button>
+            <h3>Sign Up</h3>
+            <form id="sign-up-form">
+                <label for="sign-up-email">Email:</label><br>
+                <input type="email" id="sign-up-email" name="email" placeholder="Enter your email"><br><br>
+
+                <label for="sign-up-password">Password:</label><br>
+                <input type="password" id="sign-up-password" name="password" placeholder="Enter your password"><br><br>
+
+                <label for="confirm-password">Confirm Password:</label><br>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password"><br><br>
+
+                <input type="submit" value="Sign Up">
+            </form>
+            <p id="error-message-sign-up" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="modal-sign-in" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('modal-sign-in')">&times;</button>
+            <h3>Sign In</h3>
+            <form id="sign-in-form">
+                <label for="sign-in-email">Email:</label><br>
+                <input type="email" id="sign-in-email" name="email" placeholder="Enter your email"><br><br>
+
+                <label for="sign-in-password">Password:</label><br>
+                <input type="password" id="sign-in-password" name="password" placeholder="Enter your password"><br><br>
+
+                <input type="submit" value="Sign In">
+            </form>
+            <p id="error-message-sign-in" class="error-message"></p>
+        </div>
+    </div>
+    <div class="weather-container">
+        <h1>Privacy Policy</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat.</p>
+        <p>Etiam nec leo eget felis facilisis porta. Vivamus suscipit tortor eget felis porttitor volutpat.</p>
+        <p>Quisque velit nisi, pretium ut lacinia in, elementum id enim. Proin eget tortor risus.</p>
+        <p>Nulla porttitor accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+        <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+        
+        <button onclick="history.back()">Go Back</button>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Weather Center. All Rights Reserved.</p>
+            <nav class="footer-links">
+                <a href="index.html">Home</a> |
+                <a href="Privacy.html">Privacy Policy</a> | 
+                <a href="Contact.html">Terms of Service</a> | 
+                <a href="Terms.html">Contact Us</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
